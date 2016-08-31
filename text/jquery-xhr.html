@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--<meta content="text/html" charset="utf-8">-->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>2333</title>
+    <link rel="stylesheet" href="lib/bootstrap.css">
+    <style>
+        .wrapper {
+            width: 300px;
+            margin: 100px auto;
+        }
+    </style>
+    <script>
+    </script>
+</head>
+<body>
+<div class="wrapper">
+    <div class="form-group">
+        <h1>员工查询</h1>
+        <label>编号</label>
+        <input id="searchInput"
+               class="form-group"
+               type="text"
+               name="number"
+                >
+
+        <p id="searchResult"></p>
+    </div>
+    <button id="search" class="btn btn-primary">查询</button>
+</div>
+<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#search").click(function(){
+            $.ajax({
+                type:"get",
+                url:"ajax-ajax.php?number=" + $("#searchInput").val(),
+                dataType:"json",
+                success:function(data){
+                    if(data.success){
+                        $("#searchResult").html(data.msg);
+                    }else{
+                        $("#searchResult").html("出现错误:"+data.msg);
+                    }
+                },
+                error:function(jqXHR){
+                    alert("发生错误：" + jqXHR.status);
+                }
+            })
+        });
+    });
+</script>
+</body>
+</html>

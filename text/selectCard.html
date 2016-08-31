@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>js选项卡</title>
+    <style>
+        #tab{width:300px;
+            border:3px solid #CCC;
+        }
+        #tab h3{margin:0px;
+            font-size:14px;
+            width:60px;
+            height:24px;
+            line-height:24px;
+            float:left;
+            text-align:center;
+            background-color:#CCC;
+        }
+        #tab div{clear:both;
+            height:100px;
+            font-size:14px;
+            padding:20px;
+            display:none;}
+        #tab .active{background-color:#FFF;}
+    </style>
+    <script type="text/javascript">
+        window.onload=function(){
+            var oTab=document.getElementById('tab');
+            var aH3=oTab.getElementsByTagName('h3');
+            var aDiv=oTab.getElementsByTagName('div');
+
+            for(var i=0;i<aH3.length;i++){  //循环历遍onclick事件
+                aH3[i].index=i; //aH3[0].index=0 index是自定义属性
+                aH3[i].onclick=function(){
+                    for(var i=0;i<aH3.length;i++){  //循环历遍去掉h3样式和把div隐藏
+                        aH3[i].className='';
+                        aDiv[i].style.display='none';
+                    };
+                    this.className='active';  //当前按钮添加样式
+                    aDiv[this.index].style.display='block';  //div显示 this.index是当前div 即div[0]之类的
+                };
+            };
+        };
+    </script>
+</head>
+<body>
+<div id="tab">
+    <h3>Tab1</h3>
+    <h3>Tab2</h3>
+    <h3>Tab3</h3>
+    <div style="display:block">Tab1</div>
+    <div>Tab2</div>
+    <div>Tab3</div>
+</div>
+</body>
+</html>

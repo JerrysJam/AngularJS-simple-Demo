@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--<meta content="text/html" charset="utf-8">-->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>2333</title>
+    <link rel="stylesheet" href="lib/bootstrap.css">
+    <style>
+        .wrapper {
+            width: 300px;
+            margin: 100px auto;
+        }
+    </style>
+    <script>
+    </script>
+</head>
+<body>
+<div class="wrapper">
+    <div class="form-group">
+        <h1>员工查询</h1>
+        <label>编号</label>
+        <input id="searchInput"
+               class="form-group"
+               type="text"
+               name="number"
+                >
+
+        <p id="searchResult"></p>
+    </div>
+    <button id="search" class="btn btn-primary">查询</button>
+</div>
+<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+
+    });
+    document.getElementById("search").onclick = function () {
+//        var Arrays='{"array":[{"1":alert(2333)},{"2":"b"},{"11":"aa"},{"22":"bb"}]}';
+//        var Arrays='{"array":[{"1":"a"},{"2":"b"},{"11":"aa"},{"22":"bb"}]}';
+//        var josndata=JSON.parse(Arrays);
+//        var josndata=eval('('+Arrays+')');
+//        alert(josndata["array"][1][2]);
+        var request = new XMLHttpRequest();
+        request.open("GET", "ajax-ajax.php?number=" + document.getElementById("searchInput").value);
+        request.send();
+        request.onreadystatechange = function () {
+            if (request.readyState === 4) {
+                if (request.status === 200) {
+                    alert(request.responseText);
+//                    document.getElementById("searchResult").innerHTML = request.responseText;
+                    var josnData = JSON.parse(request.responseText);
+                    if (josnData.success==true) {
+                        document.getElementById("searchResult").innerHTML = josnData.msg;
+                    } else {
+                        document.getElementById("searchResult").innerHTML = "出现错误:" + josnData.msg;
+                    }
+                } else {
+                    alert("发生错误：" + request.status);
+                }
+            }
+        }
+    }
+</script>
+</body>
+</html>
